@@ -337,7 +337,7 @@ Riesgos aceptados por el alcance académico: manipulación de LocalStorage/Sessi
 
 https://github.com/Daniel-ux1026/clinica-santivanez-hibrida
 
-Repositorio público del proyecto académico, verificado para la cuenta `Daniel-ux1026`.
+Repositorio privado del proyecto académico, verificado para la cuenta `Daniel-ux1026`. La visibilidad puede cambiarse posteriormente desde la configuración de GitHub.
 
 ## 23. URL pública de Render
 
