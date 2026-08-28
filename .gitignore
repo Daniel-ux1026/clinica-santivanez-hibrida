@@ -1,0 +1,23 @@
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Archivos locales, temporales o sensibles
+.env
+.env.*
+!.env.example
+*.log
+tmp/
+coverage/
+
+# Exportaciones generadas por usuarios
+reserva-*.json
+estado-*.json
+
+# Nunca agregar respaldos o datos clínicos externos
+backups/
+datos-reales/
+secrets/

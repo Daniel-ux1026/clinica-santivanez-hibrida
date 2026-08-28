@@ -1,0 +1,10 @@
+[
+  {"id":"PAC-FICT-001","documento":"DOC-TEST-1001","nombre":"Alba Prueba","correo":"alba.prueba@example.invalid","telefono":"+51 900 000 101","fechaNacimiento":"1988-04-12","medicoId":"med-001","estado":"Activo"},
+  {"id":"PAC-FICT-002","documento":"DOC-TEST-1002","nombre":"Benito Muestra","correo":"benito.muestra@example.invalid","telefono":"+51 900 000 102","fechaNacimiento":"1979-11-03","medicoId":"med-002","estado":"Activo"},
+  {"id":"PAC-FICT-003","documento":"DOC-TEST-1003","nombre":"Carla Ensayo","correo":"carla.ensayo@example.invalid","telefono":"+51 900 000 103","fechaNacimiento":"2018-02-19","medicoId":"med-003","estado":"Activo"},
+  {"id":"PAC-FICT-004","documento":"DOC-TEST-1004","nombre":"Diego Demo","correo":"diego.demo@example.invalid","telefono":"+51 900 000 104","fechaNacimiento":"1991-07-08","medicoId":"med-004","estado":"Activo"},
+  {"id":"PAC-FICT-005","documento":"DOC-TEST-1005","nombre":"Eva Ejemplo","correo":"eva.ejemplo@example.invalid","telefono":"+51 900 000 105","fechaNacimiento":"1984-01-22","medicoId":"med-005","estado":"Activo"},
+  {"id":"PAC-FICT-006","documento":"DOC-TEST-1006","nombre":"Fabio Ficticio","correo":"fabio.ficticio@example.invalid","telefono":"+51 900 000 106","fechaNacimiento":"1972-10-16","medicoId":"med-001","estado":"Activo"},
+  {"id":"PAC-FICT-007","documento":"DOC-TEST-1007","nombre":"Gina Prueba","correo":"gina.prueba@example.invalid","telefono":"+51 900 000 107","fechaNacimiento":"1996-05-30","medicoId":"med-002","estado":"Activo"},
+  {"id":"PAC-FICT-008","documento":"DOC-TEST-1008","nombre":"Hugo Muestra","correo":"hugo.muestra@example.invalid","telefono":"+51 900 000 108","fechaNacimiento":"2016-09-14","medicoId":"med-003","estado":"Activo"}
+]

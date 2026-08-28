@@ -1,0 +1,7 @@
+[
+  {"id":"med-001","nombre":"Dra. Elena Prado Ficticia","especialidad":"cardiologia","registro":"CMP-FICT-1001","dias":["Lunes","Miércoles"],"horas":["09:00","10:00","11:00","15:00"]},
+  {"id":"med-002","nombre":"Dr. Mateo Ríos Demostración","especialidad":"dermatologia","registro":"CMP-FICT-1002","dias":["Martes","Jueves"],"horas":["08:30","09:30","14:30","15:30"]},
+  {"id":"med-003","nombre":"Dra. Lucía Campos Ejemplo","especialidad":"pediatria","registro":"CMP-FICT-1003","dias":["Lunes","Viernes"],"horas":["09:00","10:00","16:00","17:00"]},
+  {"id":"med-004","nombre":"Dra. Sofía Luna Simulada","especialidad":"ginecologia","registro":"CMP-FICT-1004","dias":["Martes","Miércoles"],"horas":["10:00","11:00","15:00","16:00"]},
+  {"id":"med-005","nombre":"Dr. Bruno Vega Ficticio","especialidad":"traumatologia","registro":"CMP-FICT-1005","dias":["Jueves","Viernes"],"horas":["08:00","09:00","14:00","15:00"]}
+]

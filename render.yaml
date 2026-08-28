@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: clinica-santivanez-publica
+    runtime: docker
+    plan: free
+    branch: main
+    rootDir: public-cloud
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: PORT
+        value: "10000"

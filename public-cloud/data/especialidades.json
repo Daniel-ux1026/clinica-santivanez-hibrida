@@ -1,0 +1,7 @@
+[
+  {"id":"cardiologia","nombre":"Cardiología","descripcion":"Evaluación preventiva y seguimiento cardiovascular ambulatorio."},
+  {"id":"dermatologia","nombre":"Dermatología","descripcion":"Consulta de piel, cabello y uñas con atención programada."},
+  {"id":"pediatria","nombre":"Pediatría","descripcion":"Controles y orientación de salud para niñas y niños."},
+  {"id":"ginecologia","nombre":"Ginecología","descripcion":"Atención preventiva y consulta ginecológica especializada."},
+  {"id":"traumatologia","nombre":"Traumatología","descripcion":"Evaluación musculoesquelética y control de lesiones."}
+]

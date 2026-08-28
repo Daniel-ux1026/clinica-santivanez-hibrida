@@ -1,0 +1,12 @@
+[
+  {"id":"AUD-001","fecha":"2026-08-20T13:00:00.000Z","usuario":"administrador","rol":"Administrador","accion":"Inicio de sesión simulado","resultado":"Correcto"},
+  {"id":"AUD-002","fecha":"2026-08-20T14:05:00.000Z","usuario":"recepcion","rol":"Recepción","accion":"Importó reserva 11111111…","resultado":"Correcto"},
+  {"id":"AUD-003","fecha":"2026-08-20T14:06:00.000Z","usuario":"recepcion","rol":"Recepción","accion":"Intentó importar UUID duplicado","resultado":"Rechazado"},
+  {"id":"AUD-004","fecha":"2026-08-21T09:10:00.000Z","usuario":"medico","rol":"Médico","accion":"Consultó paciente PAC-FICT-001","resultado":"Correcto"},
+  {"id":"AUD-005","fecha":"2026-08-21T09:15:00.000Z","usuario":"medico","rol":"Médico","accion":"Registró historia HC-FICT-006","resultado":"Correcto"},
+  {"id":"AUD-006","fecha":"2026-08-22T11:00:00.000Z","usuario":"recepcion","rol":"Recepción","accion":"Confirmó cita 22222222…","resultado":"Correcto"},
+  {"id":"AUD-007","fecha":"2026-08-23T16:00:00.000Z","usuario":"administrador","rol":"Administrador","accion":"Consultó auditoría","resultado":"Correcto"},
+  {"id":"AUD-008","fecha":"2026-08-24T10:00:00.000Z","usuario":"recepcion","rol":"Recepción","accion":"Exportó respuesta de estado","resultado":"Correcto"},
+  {"id":"AUD-009","fecha":"2026-08-25T12:00:00.000Z","usuario":"medico","rol":"Médico","accion":"Cerró sesión","resultado":"Correcto"},
+  {"id":"AUD-010","fecha":"2026-08-26T15:00:00.000Z","usuario":"administrador","rol":"Administrador","accion":"Verificó configuración local","resultado":"Correcto"}
+]

@@ -1,0 +1,20 @@
+services:
+  public-cloud:
+    build:
+      context: ./public-cloud
+      dockerfile: Dockerfile
+    container_name: santivanez-public-cloud
+    environment:
+      PORT: "8080"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  private-cloud:
+    build:
+      context: ./private-cloud
+      dockerfile: Dockerfile
+    container_name: santivanez-private-cloud
+    ports:
+      - "8081:80"
+    restart: unless-stopped

@@ -1,0 +1,8 @@
+[
+  {"id":"HC-FICT-001","pacienteId":"PAC-FICT-001","medicoId":"med-001","fecha":"2026-07-10","diagnostico":"Diagnóstico cardiovascular ficticio A","tratamiento":"Plan preventivo ficticio A","notas":"Registro académico sin valor clínico."},
+  {"id":"HC-FICT-002","pacienteId":"PAC-FICT-002","medicoId":"med-002","fecha":"2026-07-12","diagnostico":"Diagnóstico dermatológico ficticio B","tratamiento":"Tratamiento simulado B","notas":"Caso completamente inventado."},
+  {"id":"HC-FICT-003","pacienteId":"PAC-FICT-003","medicoId":"med-003","fecha":"2026-07-15","diagnostico":"Diagnóstico pediátrico ficticio C","tratamiento":"Plan de control simulado C","notas":"Sin información médica real."},
+  {"id":"HC-FICT-004","pacienteId":"PAC-FICT-004","medicoId":"med-004","fecha":"2026-07-18","diagnostico":"Diagnóstico ginecológico ficticio D","tratamiento":"Tratamiento de demostración D","notas":"Ejemplo solo para interfaz."},
+  {"id":"HC-FICT-005","pacienteId":"PAC-FICT-005","medicoId":"med-005","fecha":"2026-07-21","diagnostico":"Diagnóstico traumatológico ficticio E","tratamiento":"Plan físico simulado E","notas":"No usar para decisiones clínicas."},
+  {"id":"HC-FICT-006","pacienteId":"PAC-FICT-006","medicoId":"med-001","fecha":"2026-07-25","diagnostico":"Diagnóstico cardiovascular ficticio F","tratamiento":"Seguimiento simulado F","notas":"Datos creados para prueba."}
+]
