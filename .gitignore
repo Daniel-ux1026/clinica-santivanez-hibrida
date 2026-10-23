@@ -1,23 +1,18 @@
-# Sistema operativo y editores
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-*.swp
-
-# Archivos locales, temporales o sensibles
 .env
 .env.*
 !.env.example
-*.log
+node_modules/
+referencias/
 tmp/
-coverage/
-
-# Exportaciones generadas por usuarios
-reserva-*.json
-estado-*.json
-
-# Nunca agregar respaldos o datos clínicos externos
 backups/
-datos-reales/
-secrets/
+config/accesos-locales.txt
+*.log
+.DS_Store
+
+# Publicación limitada a código, diagramas y evidencias.
+*.pdf
+*.docx
+*.zip
+docs/guion-sustentacion.md
+scripts/create-report.py
+scripts/export-report.ps1

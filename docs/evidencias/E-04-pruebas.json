@@ -1,0 +1,129 @@
+{
+  "executedAt": "2026-10-23T00:16:15.330Z",
+  "environment": "Docker Desktop local, datos sintéticos",
+  "tests": [
+    {
+      "name": "T01 Salud de API pública y privada",
+      "result": "PASS",
+      "milliseconds": 14
+    },
+    {
+      "name": "T02 Catálogo de cinco especialidades",
+      "result": "PASS",
+      "milliseconds": 0
+    },
+    {
+      "name": "T03 Rechaza reserva sin aceptación del aviso",
+      "result": "PASS",
+      "milliseconds": 23
+    },
+    {
+      "name": "T04 Rechaza campos clínicos en la API pública",
+      "result": "PASS",
+      "milliseconds": 4
+    },
+    {
+      "name": "T05 Rechaza fecha fuera del horizonte",
+      "result": "PASS",
+      "milliseconds": 16
+    },
+    {
+      "name": "T06 Dos solicitudes concurrentes generan 201 y 409",
+      "result": "PASS",
+      "milliseconds": 20
+    },
+    {
+      "name": "T07 El UUID solo no permite consultar una reserva",
+      "result": "PASS",
+      "milliseconds": 5
+    },
+    {
+      "name": "T08 Clave incorrecta rechazada y clave válida aceptada",
+      "result": "PASS",
+      "milliseconds": 22
+    },
+    {
+      "name": "T09 El servicio público no expone historias ni integración por el gateway",
+      "result": "PASS",
+      "milliseconds": 44
+    },
+    {
+      "name": "T10 Acceso privado sin sesión rechazado",
+      "result": "PASS",
+      "milliseconds": 18
+    },
+    {
+      "name": "T11 Login inválido rechazado",
+      "result": "PASS",
+      "milliseconds": 53
+    },
+    {
+      "name": "T12 Sesión HttpOnly y SameSite Strict",
+      "result": "PASS",
+      "milliseconds": 80
+    },
+    {
+      "name": "T13 Recepción no consulta registros clínicos ni auditoría",
+      "result": "PASS",
+      "milliseconds": 21
+    },
+    {
+      "name": "T14 Sincronización pública a privada automática",
+      "result": "PASS",
+      "milliseconds": 2072
+    },
+    {
+      "name": "T15 Recepción confirma y el estado retorna al portal público",
+      "result": "PASS",
+      "milliseconds": 3112
+    },
+    {
+      "name": "T16 Médico consulta solo su registro asignado",
+      "result": "PASS",
+      "milliseconds": 79
+    },
+    {
+      "name": "T17 Médico no cambia estado de citas",
+      "result": "PASS",
+      "milliseconds": 14
+    },
+    {
+      "name": "T18 Administración ve auditoría y métricas sin acceso clínico",
+      "result": "PASS",
+      "milliseconds": 66
+    },
+    {
+      "name": "T19 Rechaza solicitud de origen ajeno",
+      "result": "PASS",
+      "milliseconds": 10
+    },
+    {
+      "name": "T20 Persistencia tras recrear los dos contenedores de base de datos",
+      "result": "PASS",
+      "milliseconds": 7180
+    },
+    {
+      "name": "T21 Cancelación autorizada e idempotente",
+      "result": "PASS",
+      "milliseconds": 22
+    },
+    {
+      "name": "T22 Cancelación sincronizada y horario liberado",
+      "result": "PASS",
+      "milliseconds": 1075
+    },
+    {
+      "name": "T23 Reintentos de sincronización no duplican la cita",
+      "result": "PASS",
+      "milliseconds": 4007
+    },
+    {
+      "name": "T24 Cierre de sesión invalida el acceso",
+      "result": "PASS",
+      "milliseconds": 28
+    }
+  ],
+  "total": 24,
+  "passed": 24,
+  "failed": 0
+}

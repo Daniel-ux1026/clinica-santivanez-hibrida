@@ -1,14 +1,28 @@
+# Preparado para Render; no se ha desplegado. Revisar planes/región/costos antes de aplicar.
 services:
   - type: web
-    name: clinica-santivanez-publica
+    name: clinica-santivanez-apf2-publica
     runtime: docker
-    plan: free
-    branch: main
-    rootDir: public-cloud
-    dockerfilePath: ./Dockerfile
+    plan: starter
+    region: virginia
+    dockerfilePath: ./docker/Dockerfile.render
     dockerContext: .
     healthCheckPath: /health
-    autoDeployTrigger: commit
+    autoDeployTrigger: 'off'
     envVars:
-      - key: PORT
-        value: "10000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: santivanez-citas-apf2
+          property: connectionString
+      - key: INTEGRATION_TOKEN
+        generateValue: true
+      - key: COOKIE_SECURE
+        value: 'true'
+      - key: TRUST_PROXY
+        value: 'true'
+databases:
+  - name: santivanez-citas-apf2
+    plan: basic-256mb
+    region: virginia
+    databaseName: bookings
+    ipAllowList: []

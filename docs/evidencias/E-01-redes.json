@@ -1,0 +1,78 @@
+{
+  "executedAt": "2026-10-23T00:21:18.030Z",
+  "networks": [
+    {
+      "name": "santivanez-apf2_clinical-data",
+      "internal": true,
+      "subnets": [
+        {
+          "Subnet": "10.42.40.0/24",
+          "Gateway": "10.42.40.1"
+        }
+      ],
+      "containers": [
+        "santivanez-apf2-clinical-db-1",
+        "santivanez-apf2-sync-agent-1",
+        "santivanez-apf2-private-api-1"
+      ]
+    },
+    {
+      "name": "santivanez-apf2_staff",
+      "internal": false,
+      "subnets": [
+        {
+          "Subnet": "10.42.50.0/24",
+          "Gateway": "10.42.50.1"
+        }
+      ],
+      "containers": [
+        "santivanez-apf2-private-web-1",
+        "santivanez-apf2-private-api-1"
+      ]
+    },
+    {
+      "name": "santivanez-apf2_edge",
+      "internal": false,
+      "subnets": [
+        {
+          "Subnet": "10.42.10.0/24",
+          "Gateway": "10.42.10.1"
+        }
+      ],
+      "containers": [
+        "santivanez-apf2-public-web-1",
+        "santivanez-apf2-public-api-1"
+      ]
+    },
+    {
+      "name": "santivanez-apf2_integration",
+      "internal": true,
+      "subnets": [
+        {
+          "Subnet": "10.42.30.0/24",
+          "Gateway": "10.42.30.1"
+        }
+      ],
+      "containers": [
+        "santivanez-apf2-sync-agent-1",
+        "santivanez-apf2-public-api-1"
+      ]
+    },
+    {
+      "name": "santivanez-apf2_public-data",
+      "internal": true,
+      "subnets": [
+        {
+          "Subnet": "10.42.20.0/24",
+          "Gateway": "10.42.20.1"
+        }
+      ],
+      "containers": [
+        "santivanez-apf2-public-db-1",
+        "santivanez-apf2-public-api-1"
+      ]
+    }
+  ],
+  "publicApiToClinicalDb": "DNS_NO_RESUELVE_Y_TCP_BLOQUEADO",
+  "applicationDatabaseRole": "clinic_app|f|f|f"
+}

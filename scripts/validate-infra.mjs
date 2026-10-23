@@ -1,0 +1,25 @@
+import {execFileSync} from 'node:child_process';
+import {writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const run=(...args)=>execFileSync('docker',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+const ids=run('compose','ps','-q').split(/\s+/);
+const containers=JSON.parse(run('inspect',...ids));
+assert.equal(containers.length,7);
+const summary=containers.map(c=>({service:c.Config.Labels['com.docker.compose.service'],image:c.Config.Image,state:c.State.Status,health:c.State.Health?.Status||'not-defined',user:c.Config.User||'image-default',networks:Object.keys(c.NetworkSettings.Networks),ports:Object.entries(c.NetworkSettings.Ports).filter(([,v])=>v).map(([port,bind])=>({port,bind})),memoryMiB:c.HostConfig.Memory/1048576,cpus:c.HostConfig.NanoCpus/1e9}));
+for(const s of summary){assert.equal(s.state,'running');if(s.service.endsWith('-db'))assert.equal(s.ports.length,0);}
+const nets=JSON.parse(run('network','inspect',...new Set(summary.flatMap(s=>s.networks)))).map(n=>({name:n.Name,internal:n.Internal,subnets:n.IPAM.Config,containers:Object.values(n.Containers||{}).map(c=>c.Name)}));
+assert.equal(nets.length,5);assert.equal(nets.filter(n=>n.internal).length,3);
+const publicApi=containers.find(c=>c.Config.Labels['com.docker.compose.service']==='public-api');
+const isolated=run('exec',publicApi.Id,'node','-e',"require('node:dns').lookup('clinical-db',(e,a)=>{console.log(e?'ISOLATED':'REACHABLE');process.exit(e?0:1)})");
+assert.equal(isolated,'ISOLATED');
+const clinical=containers.find(c=>c.Config.Labels['com.docker.compose.service']==='clinical-db');
+const clinicalIp=Object.values(clinical.NetworkSettings.Networks)[0].IPAddress;
+const tcp=run('exec',publicApi.Id,'node','-e',`const n=require('node:net').connect(5432,'${clinicalIp}');n.setTimeout(1500);n.on('connect',()=>{console.log('REACHABLE');n.destroy();process.exit(1)});n.on('timeout',()=>{console.log('BLOCKED');n.destroy()});n.on('error',()=>console.log('BLOCKED'));`);
+assert.equal(tcp,'BLOCKED');
+const appRole=run('compose','exec','-T','public-db','psql','-U','clinic_owner','-d','bookings','-Atc',"SELECT rolname,rolsuper,rolcreatedb,rolcreaterole FROM pg_roles WHERE rolname='clinic_app'");
+assert.equal(appRole,'clinic_app|f|f|f');
+const stats=run('stats','--no-stream','--format','{{.Name}} | CPU {{.CPUPerc}} | RAM {{.MemUsage}}',...ids);
+writeFileSync('docs/evidencias/E-01-redes.json',JSON.stringify({executedAt:new Date().toISOString(),networks:nets,publicApiToClinicalDb:'DNS_NO_RESUELVE_Y_TCP_BLOQUEADO',applicationDatabaseRole:appRole},null,2)+'\n');
+writeFileSync('docs/evidencias/E-02-recursos.json',JSON.stringify({executedAt:new Date().toISOString(),containers:summary},null,2)+'\n');
+writeFileSync('docs/evidencias/E-06-observabilidad.txt','Captura puntual, no prueba de carga\n'+new Date().toISOString()+'\n\n'+stats+'\n\n'+run('compose','logs','--tail','8','sync-agent')+'\n');
+console.log('Infraestructura verificada: 7 servicios, 5 redes, 3 internas, BD sin puertos, API pública sin acceso DNS a BD clínica, usuario SQL sin privilegios administrativos.');

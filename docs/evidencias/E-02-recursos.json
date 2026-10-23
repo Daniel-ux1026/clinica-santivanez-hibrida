@@ -1,0 +1,120 @@
+{
+  "executedAt": "2026-10-23T00:21:18.032Z",
+  "containers": [
+    {
+      "service": "clinical-db",
+      "image": "postgres:17-alpine",
+      "state": "running",
+      "health": "healthy",
+      "user": "image-default",
+      "networks": [
+        "santivanez-apf2_clinical-data"
+      ],
+      "ports": [],
+      "memoryMiB": 256,
+      "cpus": 0.5
+    },
+    {
+      "service": "private-api",
+      "image": "santivanez-apf2-api:2.0",
+      "state": "running",
+      "health": "healthy",
+      "user": "node",
+      "networks": [
+        "santivanez-apf2_clinical-data",
+        "santivanez-apf2_staff"
+      ],
+      "ports": [],
+      "memoryMiB": 256,
+      "cpus": 0.5
+    },
+    {
+      "service": "private-web",
+      "image": "santivanez-apf2-private-web",
+      "state": "running",
+      "health": "not-defined",
+      "user": "101",
+      "networks": [
+        "santivanez-apf2_staff"
+      ],
+      "ports": [
+        {
+          "port": "8080/tcp",
+          "bind": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8081"
+            }
+          ]
+        }
+      ],
+      "memoryMiB": 64,
+      "cpus": 0.25
+    },
+    {
+      "service": "public-api",
+      "image": "santivanez-apf2-api:2.0",
+      "state": "running",
+      "health": "healthy",
+      "user": "node",
+      "networks": [
+        "santivanez-apf2_edge",
+        "santivanez-apf2_integration",
+        "santivanez-apf2_public-data"
+      ],
+      "ports": [],
+      "memoryMiB": 256,
+      "cpus": 0.5
+    },
+    {
+      "service": "public-db",
+      "image": "postgres:17-alpine",
+      "state": "running",
+      "health": "healthy",
+      "user": "image-default",
+      "networks": [
+        "santivanez-apf2_public-data"
+      ],
+      "ports": [],
+      "memoryMiB": 256,
+      "cpus": 0.5
+    },
+    {
+      "service": "public-web",
+      "image": "santivanez-apf2-public-web",
+      "state": "running",
+      "health": "not-defined",
+      "user": "101",
+      "networks": [
+        "santivanez-apf2_edge"
+      ],
+      "ports": [
+        {
+          "port": "8080/tcp",
+          "bind": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8080"
+            }
+          ]
+        }
+      ],
+      "memoryMiB": 64,
+      "cpus": 0.25
+    },
+    {
+      "service": "sync-agent",
+      "image": "santivanez-apf2-api:2.0",
+      "state": "running",
+      "health": "not-defined",
+      "user": "node",
+      "networks": [
+        "santivanez-apf2_clinical-data",
+        "santivanez-apf2_integration"
+      ],
+      "ports": [],
+      "memoryMiB": 256,
+      "cpus": 0.5
+    }
+  ]
+}
