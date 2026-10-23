@@ -1,5 +1,0 @@
-.git
-.gitignore
-*.md
-render.yaml
-nginx/default.conf

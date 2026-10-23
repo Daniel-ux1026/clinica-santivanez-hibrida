@@ -1,0 +1,19 @@
+Captura puntual, no prueba de carga
+2026-10-23T00:21:18.032Z
+
+santivanez-apf2-clinical-db-1 | CPU 0.04% | RAM 28.64MiB / 256MiB
+santivanez-apf2-private-api-1 | CPU 0.00% | RAM 22.04MiB / 256MiB
+santivanez-apf2-private-web-1 | CPU 0.00% | RAM 13.15MiB / 64MiB
+santivanez-apf2-public-api-1 | CPU 0.70% | RAM 23.61MiB / 256MiB
+santivanez-apf2-public-db-1 | CPU 0.04% | RAM 24.59MiB / 256MiB
+santivanez-apf2-public-web-1 | CPU 0.00% | RAM 13.5MiB / 64MiB
+santivanez-apf2-sync-agent-1 | CPU 0.03% | RAM 21.44MiB / 256MiB
+
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}
+sync-agent-1  | {"event":"sync","imported":0,"delivered":0}

@@ -1,23 +1,24 @@
-# Sistema operativo y editores
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-*.swp
-
-# Archivos locales, temporales o sensibles
 .env
 .env.*
 !.env.example
-*.log
+node_modules/
+referencias/
 tmp/
-coverage/
-
-# Exportaciones generadas por usuarios
-reserva-*.json
-estado-*.json
-
-# Nunca agregar respaldos o datos clínicos externos
 backups/
-datos-reales/
-secrets/
+config/accesos-locales.txt
+config/accesos-azure*
+config/azure-*.parameters.json
+.azure/
+*.pem
+*.key
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+docs/*.pdf
+docs/*.docx
+docs/distribucion-contribuciones.md
+docs/guion-sustentacion.md
+docs/revision-detallada-apf2.md
+scripts/*report*.py
+scripts/export-report.ps1

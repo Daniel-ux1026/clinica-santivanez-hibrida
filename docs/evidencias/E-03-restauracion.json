@@ -1,0 +1,29 @@
+{
+  "executedAt": "2026-10-23T00:09:07.475Z",
+  "scope": "Datos sintéticos. Restauración en bases temporales; no se modificaron las bases de origen. Respaldos locales sin cifrar, excluidos de Git.",
+  "results": [
+    {
+      "service": "public-db",
+      "source": "bookings",
+      "restoredTo": "base temporal independiente eliminada tras verificar",
+      "rows": {
+        "bookings": 2,
+        "integration_commands": 1
+      },
+      "sha256": "672742e32a6cd776950b3e6753e9cc6a88a34f130bfb0d3c6abe9c19e3bc1340",
+      "result": "PASS"
+    },
+    {
+      "service": "clinical-db",
+      "source": "clinical",
+      "restoredTo": "base temporal independiente eliminada tras verificar",
+      "rows": {
+        "appointments": 2,
+        "clinical_records": 2,
+        "audit": 7
+      },
+      "sha256": "13b1513b285a7eee89076f1865dbf69f7d7e9dac45030cf6cd541468aafa5b2e",
+      "result": "PASS"
+    }
+  ]
+}

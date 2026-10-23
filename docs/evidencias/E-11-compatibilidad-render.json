@@ -1,0 +1,16 @@
+{
+  "executedAt": "2026-10-23T00:21:07.184Z",
+  "scope": "Prueba local de imagen; no es despliegue en Render",
+  "port": 10000,
+  "health": {
+    "status": "ok",
+    "mode": "public",
+    "data": "synthetic"
+  },
+  "privateFiles": {
+    "privatePortal": false,
+    "privateSchema": false,
+    "worker": false
+  },
+  "result": "PASS"
+}

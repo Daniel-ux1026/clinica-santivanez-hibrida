@@ -1,0 +1,105 @@
+name: santivanez-azure-private
+x-api: &api
+  image: santivanez-apf2-api:azure
+  build: {context: ../.., dockerfile: docker/Dockerfile}
+  restart: unless-stopped
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  read_only: true
+  tmpfs: [/tmp]
+  mem_limit: 256m
+  cpus: 0.5
+x-db: &db
+  image: postgres:17-alpine
+  restart: unless-stopped
+  security_opt: [no-new-privileges:true]
+  mem_limit: 384m
+  cpus: 0.5
+  healthcheck:
+    test: [CMD-SHELL, 'pg_isready -U clinic_owner -d "$$POSTGRES_DB"']
+    interval: 5s
+    timeout: 3s
+    retries: 15
+services:
+  public-api:
+    <<: *api
+    environment:
+      APP_MODE: public
+      APP_ORIGIN: ${PUBLIC_ORIGIN:?Configura el origen público}
+      DATABASE_URL: postgres://clinic_app:${PUBLIC_APP_PASSWORD:?Configura contraseña}@public-db:5432/bookings
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:?Configura token}
+      PORT: '3000'
+      TRUST_PROXY: 'true'
+    ports: ['${PRIVATE_BIND_IP:-10.60.20.4}:3000:3000']
+    networks: [edge, public-data, integration]
+    depends_on: {public-db: {condition: service_healthy}}
+  public-db:
+    <<: *db
+    environment:
+      POSTGRES_USER: clinic_owner
+      POSTGRES_DB: bookings
+      POSTGRES_PASSWORD: ${PUBLIC_DB_PASSWORD:?Configura contraseña}
+      APP_PASSWORD: ${PUBLIC_APP_PASSWORD:?Configura contraseña}
+    volumes:
+      - /srv/santivanez/public-data:/var/lib/postgresql/data
+      - ../init-db.sh:/docker-entrypoint-initdb.d/01-app.sh:ro
+    networks: [public-data]
+  private-web:
+    image: santivanez-apf2-staff:azure
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile.web
+      args: {PORTAL: private}
+    environment: {API_HOST: private-api, NGINX_ENVSUBST_FILTER: API_HOST}
+    ports: ['127.0.0.1:8081:8080']
+    networks: [staff]
+    depends_on: {private-api: {condition: service_healthy}}
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    mem_limit: 96m
+    cpus: 0.5
+  private-api:
+    <<: *api
+    environment:
+      APP_MODE: private
+      APP_ORIGIN: http://localhost:8081
+      DATABASE_URL: postgres://clinic_app:${PRIVATE_APP_PASSWORD:?Configura contraseña}@clinical-db:5432/clinical
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:?Configura token}
+      RECEPTION_PASSWORD: ${RECEPTION_PASSWORD:?Configura contraseña}
+      DOCTOR_PASSWORD: ${DOCTOR_PASSWORD:?Configura contraseña}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Configura contraseña}
+      PORT: '3000'
+      TRUST_PROXY: 'true'
+    networks: [staff, clinical-data]
+    depends_on: {clinical-db: {condition: service_healthy}}
+  clinical-db:
+    <<: *db
+    environment:
+      POSTGRES_USER: clinic_owner
+      POSTGRES_DB: clinical
+      POSTGRES_PASSWORD: ${PRIVATE_DB_PASSWORD:?Configura contraseña}
+      APP_PASSWORD: ${PRIVATE_APP_PASSWORD:?Configura contraseña}
+    volumes:
+      - /srv/santivanez/clinical-data:/var/lib/postgresql/data
+      - ../init-db.sh:/docker-entrypoint-initdb.d/01-app.sh:ro
+    networks: [clinical-data]
+  sync-agent:
+    <<: *api
+    command: [node, app/worker/index.js]
+    healthcheck: {disable: true}
+    environment:
+      DATABASE_URL: postgres://clinic_app:${PRIVATE_APP_PASSWORD:?Configura contraseña}@clinical-db:5432/clinical
+      PUBLIC_API_URL: http://public-api:3000
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:?Configura token}
+      SYNC_INTERVAL_MS: '3000'
+    networks: [integration, clinical-data]
+    depends_on:
+      private-api: {condition: service_healthy}
+      public-api: {condition: service_healthy}
+networks:
+  edge: {ipam: {config: [{subnet: 10.42.10.0/24}]}}
+  public-data: {internal: true, ipam: {config: [{subnet: 10.42.20.0/24}]}}
+  integration: {internal: true, ipam: {config: [{subnet: 10.42.30.0/24}]}}
+  clinical-data: {internal: true, ipam: {config: [{subnet: 10.42.40.0/24}]}}
+  staff: {ipam: {config: [{subnet: 10.42.50.0/24}]}}

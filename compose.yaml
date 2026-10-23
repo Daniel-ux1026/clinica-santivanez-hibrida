@@ -1,0 +1,126 @@
+name: santivanez-apf2
+x-api: &api
+  image: santivanez-apf2-api:2.0
+  restart: unless-stopped
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  read_only: true
+  tmpfs: [/tmp]
+  mem_limit: 256m
+  cpus: 0.5
+x-db: &db
+  image: postgres:17-alpine
+  restart: unless-stopped
+  security_opt: [no-new-privileges:true]
+  mem_limit: 256m
+  cpus: 0.5
+  healthcheck:
+    test: [CMD-SHELL, 'pg_isready -U clinic_owner -d "$$POSTGRES_DB"']
+    interval: 5s
+    timeout: 3s
+    retries: 10
+services:
+  public-web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+      args: {PORTAL: public}
+    environment: {API_HOST: public-api, NGINX_ENVSUBST_FILTER: API_HOST}
+    ports: ['127.0.0.1:8080:8080']
+    networks: [edge]
+    depends_on:
+      public-api: {condition: service_healthy}
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.25
+  public-api:
+    <<: *api
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      APP_MODE: public
+      APP_ORIGIN: http://localhost:8080
+      DATABASE_URL: postgres://clinic_app:${PUBLIC_APP_PASSWORD:?Ejecuta node scripts/setup.mjs}@public-db:5432/bookings
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:?Ejecuta setup}
+      PORT: '3000'
+      TRUST_PROXY: 'true'
+    networks: [edge, public-data, integration]
+    depends_on:
+      public-db: {condition: service_healthy}
+  public-db:
+    <<: *db
+    environment:
+      POSTGRES_USER: clinic_owner
+      POSTGRES_DB: bookings
+      POSTGRES_PASSWORD: ${PUBLIC_DB_PASSWORD:?Ejecuta setup}
+      APP_PASSWORD: ${PUBLIC_APP_PASSWORD:?Ejecuta setup}
+    volumes:
+      - public-data:/var/lib/postgresql/data
+      - ./infra/init-db.sh:/docker-entrypoint-initdb.d/01-app.sh:ro
+    networks: [public-data]
+  private-web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+      args: {PORTAL: private}
+    environment: {API_HOST: private-api, NGINX_ENVSUBST_FILTER: API_HOST}
+    ports: ['127.0.0.1:8081:8080']
+    networks: [staff]
+    depends_on:
+      private-api: {condition: service_healthy}
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.25
+  private-api:
+    <<: *api
+    environment:
+      APP_MODE: private
+      APP_ORIGIN: http://localhost:8081
+      DATABASE_URL: postgres://clinic_app:${PRIVATE_APP_PASSWORD:?Ejecuta setup}@clinical-db:5432/clinical
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:?Ejecuta setup}
+      RECEPTION_PASSWORD: ${RECEPTION_PASSWORD:?Ejecuta setup}
+      DOCTOR_PASSWORD: ${DOCTOR_PASSWORD:?Ejecuta setup}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Ejecuta setup}
+      PORT: '3000'
+      TRUST_PROXY: 'true'
+    networks: [staff, clinical-data]
+    depends_on:
+      clinical-db: {condition: service_healthy}
+  clinical-db:
+    <<: *db
+    environment:
+      POSTGRES_USER: clinic_owner
+      POSTGRES_DB: clinical
+      POSTGRES_PASSWORD: ${PRIVATE_DB_PASSWORD:?Ejecuta setup}
+      APP_PASSWORD: ${PRIVATE_APP_PASSWORD:?Ejecuta setup}
+    volumes:
+      - clinical-data:/var/lib/postgresql/data
+      - ./infra/init-db.sh:/docker-entrypoint-initdb.d/01-app.sh:ro
+    networks: [clinical-data]
+  sync-agent:
+    <<: *api
+    command: [node, app/worker/index.js]
+    healthcheck: {disable: true}
+    environment:
+      DATABASE_URL: postgres://clinic_app:${PRIVATE_APP_PASSWORD:?Ejecuta setup}@clinical-db:5432/clinical
+      PUBLIC_API_URL: http://public-api:3000
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:?Ejecuta setup}
+      SYNC_INTERVAL_MS: '3000'
+    networks: [integration, clinical-data]
+    depends_on:
+      private-api: {condition: service_healthy}
+      public-api: {condition: service_healthy}
+networks:
+  edge: {ipam: {config: [{subnet: 10.42.10.0/24}]}}
+  public-data: {internal: true, ipam: {config: [{subnet: 10.42.20.0/24}]}}
+  integration: {internal: true, ipam: {config: [{subnet: 10.42.30.0/24}]}}
+  clinical-data: {internal: true, ipam: {config: [{subnet: 10.42.40.0/24}]}}
+  staff: {ipam: {config: [{subnet: 10.42.50.0/24}]}}
+volumes:
+  public-data:
+  clinical-data:

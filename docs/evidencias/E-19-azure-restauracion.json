@@ -1,0 +1,31 @@
+{
+  "executedAt": "2026-10-23T16:18:11.627Z",
+  "scope": "Datos sintéticos. Restauración en bases temporales; no se modificaron las bases de origen. Respaldos locales sin cifrar, excluidos de Git.",
+  "results": [
+    {
+      "service": "public-db",
+      "source": "bookings",
+      "restoredTo": "base temporal independiente eliminada tras verificar",
+      "rows": {
+        "bookings": 1,
+        "integration_commands": 1
+      },
+      "sha256": "5f3bc90cd15a91718fd852f15b78321070c37ce3e690338ef215f52767fdfaae",
+      "result": "PASS"
+    },
+    {
+      "service": "clinical-db",
+      "source": "clinical",
+      "restoredTo": "base temporal independiente eliminada tras verificar",
+      "rows": {
+        "appointments": 1,
+        "clinical_records": 2,
+        "audit": 7
+      },
+      "sha256": "900a0696fcf52e1f7b15054246ddebc1aef202b19810b5eae68175a806c8ea38",
+      "result": "PASS"
+    }
+  ],
+  "applicationSourceCommit": "ca0bc416e21185036e4dac3c82fc4f229b04ae9f",
+  "environment": "Azure for Students; datos sintéticos"
+}

@@ -1,0 +1,135 @@
+{
+  "executedAt": "2026-10-23T16:18:05.670Z",
+  "environment": "Azure for Students; datos sintéticos",
+  "tests": [
+    {
+      "name": "T01 Salud de API pública y privada",
+      "result": "PASS",
+      "milliseconds": 20
+    },
+    {
+      "name": "T02 Catálogo de cinco especialidades",
+      "result": "PASS",
+      "milliseconds": 0
+    },
+    {
+      "name": "T03 Rechaza reserva sin aceptación del aviso",
+      "result": "PASS",
+      "milliseconds": 41
+    },
+    {
+      "name": "T04 Rechaza campos clínicos en la API pública",
+      "result": "PASS",
+      "milliseconds": 7
+    },
+    {
+      "name": "T05 Rechaza fecha fuera del horizonte",
+      "result": "PASS",
+      "milliseconds": 7
+    },
+    {
+      "name": "T06 Dos solicitudes concurrentes generan 201 y 409",
+      "result": "PASS",
+      "milliseconds": 31
+    },
+    {
+      "name": "T07 El UUID solo no permite consultar una reserva",
+      "result": "PASS",
+      "milliseconds": 6
+    },
+    {
+      "name": "T08 Clave incorrecta rechazada y clave válida aceptada",
+      "result": "PASS",
+      "milliseconds": 23
+    },
+    {
+      "name": "T09 El servicio público no expone historias ni integración por el gateway",
+      "result": "PASS",
+      "milliseconds": 10
+    },
+    {
+      "name": "T10 Acceso privado sin sesión rechazado",
+      "result": "PASS",
+      "milliseconds": 6
+    },
+    {
+      "name": "T11 Login inválido rechazado",
+      "result": "PASS",
+      "milliseconds": 98
+    },
+    {
+      "name": "T12 Sesión HttpOnly y SameSite Strict",
+      "result": "PASS",
+      "milliseconds": 116
+    },
+    {
+      "name": "T13 Recepción no consulta registros clínicos ni auditoría",
+      "result": "PASS",
+      "milliseconds": 13
+    },
+    {
+      "name": "T14 Sincronización pública a privada automática",
+      "result": "PASS",
+      "milliseconds": 1015
+    },
+    {
+      "name": "T15 Recepción confirma y el estado retorna al portal público",
+      "result": "PASS",
+      "milliseconds": 3041
+    },
+    {
+      "name": "T16 Médico consulta solo su registro asignado",
+      "result": "PASS",
+      "milliseconds": 137
+    },
+    {
+      "name": "T17 Médico no cambia estado de citas",
+      "result": "PASS",
+      "milliseconds": 3
+    },
+    {
+      "name": "T18 Administración ve auditoría y métricas sin acceso clínico",
+      "result": "PASS",
+      "milliseconds": 101
+    },
+    {
+      "name": "T19 Rechaza solicitud de origen ajeno",
+      "result": "PASS",
+      "milliseconds": 2
+    },
+    {
+      "name": "T20 Persistencia tras recrear los dos contenedores de base de datos",
+      "result": "PASS",
+      "milliseconds": 8993
+    },
+    {
+      "name": "T21 Cancelación autorizada e idempotente",
+      "result": "PASS",
+      "milliseconds": 32
+    },
+    {
+      "name": "T22 Cancelación sincronizada y horario liberado",
+      "result": "PASS",
+      "milliseconds": 1038
+    },
+    {
+      "name": "T23 Reintentos de sincronización no duplican la cita",
+      "result": "PASS",
+      "milliseconds": 4006
+    },
+    {
+      "name": "T24 Cierre de sesión invalida el acceso",
+      "result": "PASS",
+      "milliseconds": 18
+    }
+  ],
+  "total": 24,
+  "passed": 24,
+  "failed": 0,
+  "applicationSourceCommit": "ca0bc416e21185036e4dac3c82fc4f229b04ae9f",
+  "runnerAdaptation": {
+    "verifier": "infra/azure/verify-private.sh",
+    "verifierSha256": "cd87eedcf6b3c8d6aed19276d934e36c4abfb4d927d486cca24049e9a3412117",
+    "changes": "URL pública real por NAT; rutas de evidencia Azure y Compose privado. Conserva las mismas 24 comprobaciones."
+  }
+}

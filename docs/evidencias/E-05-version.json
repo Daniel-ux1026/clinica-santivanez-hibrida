@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Daniel-ux1026/clinica-santivanez-hibrida",
+  "branch": "codex/apf2-infraestructura",
+  "baseMainCommit": "ae422d238289f81c35a9f4867fb45db1b8889eed",
+  "commitAuthor": "Codex",
+  "note": "La revisión local validada se identifica como referencia. Su historial privado no se publica. Esta rama parte del historial público y contiene únicamente código, documentación técnica, diagramas y evidencias sintéticas; sin informes ni datos académicos personales.",
+  "validatedLocalSourceCommit": "a8caf18b8abe804d989e47f1c2dd82e2f34bb9f0",
+  "validatedLocalSourceCommitDate": "2026-10-22T19:20:27-05:00"
+}
