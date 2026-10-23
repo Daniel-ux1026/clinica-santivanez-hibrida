@@ -39,12 +39,19 @@ main() {
   elif [[ "$role" != 'public' ]]; then
     echo 'Rol inválido'; exit 1
   fi
+  # El código público debe poder leerse por PostgreSQL y Nginx sin root.
+  # El JSON protegido y .env conservan permisos privados.
+  umask 022
   if [[ ! -d /opt/santivanez/.git ]]; then
     git clone --quiet --branch Dev https://github.com/Daniel-ux1026/clinica-santivanez-hibrida.git /opt/santivanez
   fi
   cd /opt/santivanez
   git fetch --quiet origin Dev
   git checkout --quiet --detach "$commit"
+  git ls-files -z | xargs -0 chmod a+r
+  find app docker infra -type d -exec chmod 755 {} +
+  chmod 755 /opt/santivanez
+  umask 077
   python3 - "$config_path" <<'PY'
 import json, pathlib, re, sys
 c=json.load(open(sys.argv[1]))
@@ -55,6 +62,16 @@ for k,v in env.items():
 p=pathlib.Path('.env');p.write_text(''.join(f'{k}={v}\n' for k,v in env.items()));p.chmod(0o600)
 PY
   docker compose --env-file .env -f "infra/azure/compose.$role.yaml" config --quiet
+  if [[ "$role" == 'private' ]]; then
+    docker compose --env-file .env -f infra/azure/compose.private.yaml up -d --wait --wait-timeout 120 public-db clinical-db
+    # Repara únicamente una inicialización interrumpida que dejó la BD sin rol.
+    # No borra datos ni cambia contraseñas de un rol existente.
+    for service in public-db clinical-db; do
+      docker compose --env-file .env -f infra/azure/compose.private.yaml exec -T "$service" sh -c '
+        exists=$(psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Atc "SELECT count(*) FROM pg_roles WHERE rolname = '\''clinic_app'\''")
+        if [ "$exists" = 0 ]; then sh /docker-entrypoint-initdb.d/01-app.sh; fi'
+    done
+  fi
   docker compose --env-file .env -f "infra/azure/compose.$role.yaml" up -d --build --wait --wait-timeout 300
   printf 'APF2 role=%s source=%s: contenedores iniciados y saludables\n' "$role" "$commit"
 }
