@@ -1,0 +1,15 @@
+name: santivanez-azure-public
+services:
+  public-web:
+    image: santivanez-apf2-web:azure
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile.web
+      args: {PORTAL: public}
+    environment: {API_HOST: '10.60.20.4', NGINX_ENVSUBST_FILTER: API_HOST}
+    ports: ['80:8080']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    mem_limit: 96m
+    cpus: 0.5

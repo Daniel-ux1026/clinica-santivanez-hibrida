@@ -6,13 +6,16 @@ referencias/
 tmp/
 backups/
 config/accesos-locales.txt
+config/accesos-azure*
+config/azure-*.parameters.json
+.azure/
+*.pem
+*.key
 *.log
 .DS_Store
 
-# Publicación limitada a código, diagramas y evidencias.
-*.pdf
-*.docx
-*.zip
-docs/guion-sustentacion.md
+docs/*.pdf
+docs/*.docx
+docs/distribucion-contribuciones.md
+docs/revision-detallada-apf2.md
 scripts/create-report.py
-scripts/export-report.ps1
