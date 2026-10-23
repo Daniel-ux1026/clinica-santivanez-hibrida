@@ -72,6 +72,16 @@ PY
         if [ "$exists" = 0 ]; then sh /docker-entrypoint-initdb.d/01-app.sh; fi'
     done
   fi
-  docker compose --env-file .env -f "infra/azure/compose.$role.yaml" up -d --build --wait --wait-timeout 300
+  if [[ "$role" == 'private' ]]; then
+    # Compose 2.40 de Ubuntu trata incorrectamente --wait con el healthcheck
+    # deshabilitado que el worker hereda de la imagen de API. Esperar primero
+    # los cinco servicios HTTP/SQL y arrancar después el worker sin ese flag.
+    docker compose --env-file .env -f infra/azure/compose.private.yaml up -d --build --wait --wait-timeout 300 public-db clinical-db public-api private-api private-web
+    docker compose --env-file .env -f infra/azure/compose.private.yaml up -d --no-build sync-agent
+    worker_id=$(docker compose --env-file .env -f infra/azure/compose.private.yaml ps -q sync-agent)
+    [[ "$(docker inspect --format '{{.State.Running}}' "$worker_id")" == true ]]
+  else
+    docker compose --env-file .env -f infra/azure/compose.public.yaml up -d --build --wait --wait-timeout 300
+  fi
   printf 'APF2 role=%s source=%s: contenedores iniciados y saludables\n' "$role" "$commit"
 }
