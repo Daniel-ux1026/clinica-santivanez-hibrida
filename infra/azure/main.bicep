@@ -84,7 +84,6 @@ resource publicNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
       { name: 'web-http-synthetic', properties: { priority: 100, direction: 'Inbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRange: '80', sourceAddressPrefix: 'Internet', destinationAddressPrefix: publicAddress } }
       { name: 'deny-other-inbound', properties: { priority: 4096, direction: 'Inbound', access: 'Deny', protocol: '*', sourcePortRange: '*', destinationPortRange: '*', sourceAddressPrefix: '*', destinationAddressPrefix: '*' } }
       { name: 'backend-api-only', properties: { priority: 100, direction: 'Outbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRange: '3000', sourceAddressPrefix: publicAddress, destinationAddressPrefix: privateAddress } }
-      { name: 'azure-dns', properties: { priority: 110, direction: 'Outbound', access: 'Allow', protocol: '*', sourcePortRange: '*', destinationPortRange: '53', sourceAddressPrefix: publicAddress, destinationAddressPrefix: 'AzurePlatformDNS' } }
       { name: 'updates-and-container-registry', properties: { priority: 120, direction: 'Outbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRanges: ['80', '443'], sourceAddressPrefix: publicAddress, destinationAddressPrefix: 'Internet' } }
       { name: 'deny-other-outbound', properties: { priority: 4096, direction: 'Outbound', access: 'Deny', protocol: '*', sourcePortRange: '*', destinationPortRange: '*', sourceAddressPrefix: '*', destinationAddressPrefix: '*' } }
     ]
@@ -99,7 +98,6 @@ resource privateNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
       { name: 'api-from-web-vm-only', properties: { priority: 100, direction: 'Inbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRange: '3000', sourceAddressPrefix: publicAddress, destinationAddressPrefix: privateAddress } }
       { name: 'deny-other-inbound', properties: { priority: 4096, direction: 'Inbound', access: 'Deny', protocol: '*', sourcePortRange: '*', destinationPortRange: '*', sourceAddressPrefix: '*', destinationAddressPrefix: '*' } }
       { name: 'web-validation', properties: { priority: 100, direction: 'Outbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRange: '80', sourceAddressPrefix: privateAddress, destinationAddressPrefix: publicAddress } }
-      { name: 'azure-dns', properties: { priority: 110, direction: 'Outbound', access: 'Allow', protocol: '*', sourcePortRange: '*', destinationPortRange: '53', sourceAddressPrefix: privateAddress, destinationAddressPrefix: 'AzurePlatformDNS' } }
       { name: 'nat-updates-and-container-registry', properties: { priority: 120, direction: 'Outbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRanges: ['80', '443'], sourceAddressPrefix: privateAddress, destinationAddressPrefix: 'Internet' } }
       { name: 'deny-other-outbound', properties: { priority: 4096, direction: 'Outbound', access: 'Deny', protocol: '*', sourcePortRange: '*', destinationPortRange: '*', sourceAddressPrefix: '*', destinationAddressPrefix: '*' } }
     ]
