@@ -1,0 +1,204 @@
+{
+  "verifiedAtUtc": "2026-10-23T16:31:20.769622+00:00",
+  "privateVm": {
+    "executedAtUtc": "2026-10-23T16:26:59.661646+00:00",
+    "hostname": "vm-private-apf2",
+    "sourceCommit": "ca0bc416e21185036e4dac3c82fc4f229b04ae9f",
+    "dockerVersion": "Docker version 29.1.3, build 29.1.3-0ubuntu3~24.04.2",
+    "composeVersion": "2.40.3+ds1-0ubuntu1~24.04.1",
+    "osRelease": {
+      "PRETTY_NAME": "\"Ubuntu 24.04.5 LTS\"",
+      "NAME": "\"Ubuntu\"",
+      "VERSION_ID": "\"24.04\"",
+      "VERSION": "\"24.04.5 LTS (Noble Numbat)\"",
+      "VERSION_CODENAME": "noble",
+      "ID": "ubuntu",
+      "ID_LIKE": "debian",
+      "HOME_URL": "\"https://www.ubuntu.com/\"",
+      "SUPPORT_URL": "\"https://help.ubuntu.com/\"",
+      "BUG_REPORT_URL": "\"https://bugs.launchpad.net/ubuntu/\"",
+      "PRIVACY_POLICY_URL": "\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"",
+      "UBUNTU_CODENAME": "noble",
+      "LOGO": "ubuntu-logo"
+    },
+    "containers": [
+      {
+        "service": "clinical-db",
+        "image": "postgres:17-alpine",
+        "imageId": "sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb",
+        "state": "running",
+        "health": "healthy",
+        "restartCount": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "source": "/srv/santivanez/clinical-data",
+            "destination": "/var/lib/postgresql/data",
+            "type": "bind"
+          },
+          {
+            "source": "/opt/santivanez/infra/init-db.sh",
+            "destination": "/docker-entrypoint-initdb.d/01-app.sh",
+            "type": "bind"
+          }
+        ]
+      },
+      {
+        "service": "private-api",
+        "image": "santivanez-apf2-api:azure",
+        "imageId": "sha256:af044013b2d7d976e022420a3cae63fba717ec208dc0483fa434072c736e37e0",
+        "state": "running",
+        "health": "healthy",
+        "restartCount": 1,
+        "ports": {},
+        "mounts": []
+      },
+      {
+        "service": "private-web",
+        "image": "santivanez-apf2-staff:azure",
+        "imageId": "sha256:7c9d504102efbb6c1fc7cee578ae3fe5f32a412a471965707c6713d8d89d09b0",
+        "state": "running",
+        "health": "disabled for worker",
+        "restartCount": 0,
+        "ports": {
+          "8080/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8081"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "service": "public-api",
+        "image": "santivanez-apf2-api:azure",
+        "imageId": "sha256:af044013b2d7d976e022420a3cae63fba717ec208dc0483fa434072c736e37e0",
+        "state": "running",
+        "health": "healthy",
+        "restartCount": 1,
+        "ports": {
+          "3000/tcp": [
+            {
+              "HostIp": "10.60.20.4",
+              "HostPort": "3000"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "service": "public-db",
+        "image": "postgres:17-alpine",
+        "imageId": "sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb",
+        "state": "running",
+        "health": "healthy",
+        "restartCount": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "source": "/opt/santivanez/infra/init-db.sh",
+            "destination": "/docker-entrypoint-initdb.d/01-app.sh",
+            "type": "bind"
+          },
+          {
+            "source": "/srv/santivanez/public-data",
+            "destination": "/var/lib/postgresql/data",
+            "type": "bind"
+          }
+        ]
+      },
+      {
+        "service": "sync-agent",
+        "image": "santivanez-apf2-api:azure",
+        "imageId": "sha256:af044013b2d7d976e022420a3cae63fba717ec208dc0483fa434072c736e37e0",
+        "state": "running",
+        "health": "disabled for worker",
+        "restartCount": 1,
+        "ports": {},
+        "mounts": []
+      }
+    ],
+    "egressIp": "20.102.241.42",
+    "health": {
+      "staff": {
+        "status": 200,
+        "body": {
+          "status": "ok",
+          "mode": "private",
+          "data": "synthetic"
+        }
+      },
+      "publicApi": {
+        "status": 200,
+        "body": {
+          "status": "ok",
+          "mode": "public",
+          "data": "synthetic"
+        }
+      }
+    },
+    "dataMount": {
+      "filesystems": [
+        {
+          "source": "/dev/sda",
+          "target": "/srv/santivanez",
+          "fstype": "ext4",
+          "options": "rw,relatime"
+        }
+      ]
+    },
+    "dataDiskAlias": "/dev/sda",
+    "appDatabaseRoles": {
+      "public-db": {
+        "role": "clinic_app",
+        "superuser": false,
+        "createDb": false,
+        "createRole": false,
+        "login": true
+      },
+      "clinical-db": {
+        "role": "clinic_app",
+        "superuser": false,
+        "createDb": false,
+        "createRole": false,
+        "login": true
+      }
+    },
+    "envPermissions": "0o600"
+  },
+  "webVm": {
+    "executedAtUtc": "2026-10-23T16:13:34.872993+00:00",
+    "hostname": "vm-web-apf2",
+    "sourceCommit": "ca0bc416e21185036e4dac3c82fc4f229b04ae9f",
+    "dockerVersion": "Docker version 29.1.3, build 29.1.3-0ubuntu3~24.04.2",
+    "composeVersion": "2.40.3+ds1-0ubuntu1~24.04.1",
+    "containers": [
+      {
+        "service": "public-web",
+        "image": "santivanez-apf2-web:azure",
+        "imageId": "sha256:a58c2715add81ae512da0d4d8b6701c9a04e1e64fc805b5fe0498da30492b9b6",
+        "state": "running",
+        "health": "not configured",
+        "ports": {
+          "8080/tcp": [
+            {
+              "HostIp": "",
+              "HostPort": "80"
+            }
+          ]
+        }
+      }
+    ],
+    "gatewayHealth": {
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "mode": "public",
+        "data": "synthetic"
+      }
+    }
+  },
+  "logicalServices": 7,
+  "note": "Capturas puntuales con sus fechas UTC; no representan disponibilidad anual ni una prueba de carga."
+}

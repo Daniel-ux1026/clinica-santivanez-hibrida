@@ -1,10 +1,24 @@
 # Solución de Nube Híbrida para la Clínica Santivañez
 
-Segundo avance del proyecto de Servicios Cloud, ciclo 2026-2. Este repositorio contiene un **laboratorio local implementado**, con datos sintéticos, que representa la separación entre una capa pública de citas y el entorno clínico privado. Render es el destino público previsto; no se ha contratado ni desplegado un servicio cloud en esta entrega.
+Segundo avance del proyecto de Servicios Cloud, sección 42880, ciclo 2026-2. Entrega: **26/10/2026**. El laboratorio funciona **localmente y en Azure for Students**, con datos sintéticos. En Azure se configuraron una VNet, subred pública/privada, dos tablas de rutas, NAT Gateway, dos NSG y dos VMs. Se verificaron siete servicios, 24 comprobaciones funcionales, persistencia y restauración de ambas bases. Render conserva su preparación como destino original; la demostración IaaS de APF2 se realiza en Azure.
 
-La rúbrica permite laboratorios locales con diferencias documentadas frente a una VPC/VNet. Las redes Docker de este proyecto no se presentan como una VPC real ni como una nube privada completa.
+Las redes Docker y los recursos Azure se documentan por separado. La VM privada no tiene IP pública; sus bases y portal de personal no se exponen a Internet. La conexión VPN con la clínica real, TLS integral y la preparación productiva siguen pendientes.
 
-## Inicio rápido
+## Demostración Azure verificada
+
+[Portal público Azure](http://santivanez-apf2-iebrbjrdj2bbg.northcentralus.cloudapp.azure.com) · [Guía reproducible de infraestructura](infra/azure/README.md)
+
+![Arquitectura Azure](docs/arquitectura-azure.png)
+
+- `vm-web-apf2`: B2ats_v2, 2 vCPU/1 GiB, `10.60.10.4`, entrada pública TCP 80.
+- `vm-private-apf2`: B2als_v2, 2 vCPU/4 GiB, `10.60.20.4`, sin IP pública; seis contenedores backend y disco de datos de 32 GiB.
+- La VM web solo llega a la API privada por 3000; 22, 5432 y 8081 se comprobaron bloqueados. E-17/E-21 incluyen reglas y rutas efectivas, pruebas externas y salida NAT `20.102.241.42`.
+- E-18 registra las mismas 24 comprobaciones en Azure; E-19 demuestra restauración independiente de las dos bases. La aplicación desplegada está fijada al SHA `ca0bc416e21185036e4dac3c82fc4f229b04ae9f`. Los commits posteriores pueden añadir guías y evidencias.
+- El portal de personal solo escucha en loopback de la VM privada. Se opera mediante Azure Run Command; no se abrió SSH ni acceso clínico público.
+
+Las VMs se desasignan diariamente a las **03:00 de Lima**; iniciar ambas antes de una demostración si están detenidas. La URL depende de que estén encendidas. Base estimada de lista: **US$2.69 por 24 h encendidas** o **US$1.56 por 24 h desasignadas**, más tráfico/operaciones. NAT, IPs y discos siguen cobrando. [Cálculo y límites de la estimación](docs/estimacion-azure.json). El saldo restante no se ha confirmado. Usar únicamente datos ficticios: el HTTP académico no es apropiado para pacientes reales.
+
+## Inicio rápido del laboratorio local
 
 Requisitos: Docker Desktop con contenedores Linux, Docker Compose v2 o posterior, Node.js 22 o posterior y Git. Las pruebas requieren acceso a Docker desde la terminal. Reservar aproximadamente 2 GB de RAM para Docker y disponer de Internet en la primera construcción. No necesitas instalar PostgreSQL ni paquetes npm en Windows.
 
@@ -123,13 +137,13 @@ Se verifica `PORT=10000` y la ausencia de portal, esquema SQL y agente privados 
 - API y agente como usuario `node`, Nginx sin privilegios, capacidades retiradas y límites de recursos. Usuario de aplicación SQL sin superusuario, creación de bases ni roles.
 - `.env`, accesos, antecedentes y respaldos excluidos de Git y del contexto Docker.
 
-HTTP y cookies sin `Secure` se usan únicamente en localhost con datos sintéticos. No se implementó TLS entre contenedores, MFA, cifrado de respaldos/discos, alta disponibilidad, auditoría inmutable ni políticas de conservación automáticas. El agente comparte el rol SQL privado de la API; antes de producción debe recibir un rol limitado a citas y cola, sin acceso a tablas clínicas. No se afirma cumplimiento normativo ni aptitud para pacientes reales.
+HTTP se usa solo para demostración con datos ficticios, tanto local como en el portal Azure; las sesiones del personal permanecen en loopback de la VM privada. No se implementaron TLS integral, MFA del personal, cifrado específico de respaldos, alta disponibilidad, auditoría inmutable ni conservación automática. Los discos administrados usan la protección de almacenamiento de Azure registrada en E-17. El agente comparte el rol SQL privado; antes de producción necesita un rol limitado a citas y cola. No se afirma cumplimiento normativo ni aptitud para pacientes reales.
 
 ## Destino Render y traslado a VPC/VNet
 
 Ver [guía de despliegue](docs/despliegue-render.md). El Blueprint define un Web Service Docker y PostgreSQL en la misma región. El servidor Node sirve la interfaz pública directamente, por lo que en Render no se necesita un contenedor Nginx adicional. No se usa Static Site ni Supabase. El manifiesto contiene una selección técnica provisional de planes y región; no representa contratación ni presupuesto aprobado. No lo apliques sin revisar costos, región y configuración.
 
-Render administra su red; este manifiesto no crea una VPC con tablas de rutas editables. [La propuesta de traslado](infra/migracion-vpc.md) describe subred pública, subredes de aplicación/datos privadas, gateway, NAT y reglas. Se mantiene Render como destino del proyecto; el ejemplo VPC sirve para explicar la equivalencia académica y requiere una decisión posterior de infraestructura.
+Render administra su red; su manifiesto no crea una VPC con tablas editables. [La evolución del diseño](infra/migracion-vpc.md) distingue la propuesta inicial de la VNet real demostrada en Azure. Esta implementación académica no equivale a tener una VPN con la clínica ni a haber publicado el servicio preparado para Render.
 
 ## Evidencias y documentos
 
@@ -146,8 +160,18 @@ Render administra su red; este manifiesto no crea una VPC con tablas de rutas ed
 | E-11 | docs/evidencias/E-11-compatibilidad-render.json | Imagen pública en puerto 10000, probada localmente |
 | E-12 | docs/evidencias/E-12-protocolo-sync.json | Idempotencia y conflicto de versiones |
 | E-13 | docs/evidencias/E-13-manifiesto-render.json | Validación estructural con el esquema oficial de Render |
+| E-14 | docs/evidencias/E-14-publicacion.json | Huellas de los archivos de ejecución publicados |
+| E-15 | docs/evidencias/E-15-version-publicada.json | Rama Dev y commit público evaluado |
+| E-16 | docs/evidencias/E-16-auditoria-integral.json | Contraste integral de requisitos y comprobaciones actuales |
+| E-17 | docs/evidencias/E-17-azure-infraestructura.json | VNet, subredes, NSG/rutas efectivas, NAT, VMs, discos y apagado |
+| E-18 | docs/evidencias/E-18-azure-pruebas.json | 24 comprobaciones funcionales reales en Azure |
+| E-19 | docs/evidencias/E-19-azure-restauracion.json | Restauración independiente de ambas bases Azure |
+| E-20 | docs/evidencias/E-20-azure-portal.png | Captura real del portal público Azure |
+| E-21 | docs/evidencias/E-21-azure-red.json | Diez controles TCP/NAT y salud pública |
+| E-22 | docs/evidencias/E-22-azure-runtime.json | Servicios, imágenes, SHA, montaje y roles SQL |
+| E-23 | docs/evidencias/E-23-publicacion-azure.json | Cotejo de archivos y búsqueda de secretos conocidos |
 
-Esta rama contiene el código ejecutable, las instrucciones técnicas, los diagramas y las evidencias sintéticas. Los informes académicos, el guion y los scripts que incorporan datos del equipo se conservan únicamente en la entrega local.
+El informe local sigue las 14 secciones: `docs/informe-apf2.docx` editable y `docs/informe-apf2.pdf` para el aula. Los informes, guion, distribución de responsabilidades y E-15/E-16 se conservan fuera del repositorio público. El video propuesto dura 10:30, con 3:30 por integrante. El equipo debe revisar sus bloques, registrar contribuciones reales, grabar y publicar el video No listado; su URL se agregará a la carátula cuando esté verificada.
 
 ## Estructura
 
@@ -157,18 +181,21 @@ app/private/      Portal interno en HTML, CSS y JavaScript
 app/server/       API, validación, autorización y acceso SQL
 app/worker/       Agente de sincronización
 docker/           Dockerfiles y proxy Nginx
-infra/            Esquemas SQL, rol de aplicación y traslado propuesto
+infra/            SQL, rol de aplicación e infraestructura Azure real
+infra/azure/      Bicep, bootstrap, Compose por VM y verificaciones
 config/           Ejemplos sin secretos
-scripts/          Configuración local, evidencias y generación de diagramas
+scripts/          Configuración local, evidencias y generación de documentos
 tests/            Validación integral y protocolo de sincronización
-docs/             Diagramas, evidencias y guía técnica de despliegue
+docs/             Informe, diagramas, evidencias y guion
 referencias/      Antecedentes originales conservados solo localmente, fuera de Git
 ```
 
-## Continuidad del código
+## Continuidad y equipo
 
-Se conserva el caso del APF1 y la interfaz sin frameworks. El prototipo previo usaba LocalStorage, credenciales en JavaScript e intercambio manual de JSON. APF2 sustituye ese mecanismo por PostgreSQL, autorización en servidor e integración automática local. El historial de `main` conserva el prototipo. Sus antecedentes se mantienen por separado en la entrega local completa.
+Se conserva el caso del APF1 y la interfaz sin frameworks. El prototipo previo usaba LocalStorage, credenciales en JavaScript e intercambio manual de JSON. APF2 sustituye ese mecanismo por PostgreSQL, autorización en servidor e integración automática local. El historial de `main` conserva el prototipo y la copia local está en `referencias/prototipo-apf1`.
 
-Los commits de preparación asistida están identificados con autoría Codex.
+La preparación asistida conserva autoría Codex. Cada integrante debe registrar su revisión y contribución real con identidad y hash propios.
 
 APF3 deberá abordar despliegue y acceso remoto aprobados, orquestación, escalabilidad, monitoreo continuo, cifrado, MFA, integración de recordatorios y pruebas de recuperación/fallo. El proyecto sigue siendo un laboratorio académico.
+
+El informe académico y la revisión detallada de los PDF docentes se entregan de forma separada. No forman parte de este repositorio público.

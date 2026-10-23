@@ -1,0 +1,107 @@
+{
+  "verifiedAtUtc": "2026-10-23T16:31:20.769622+00:00",
+  "interVm": {
+    "executedAt": "2026-10-23T16:07:27.528952+00:00",
+    "scope": "Conectividad entre VMs Azure; se contrasta con NSG y rutas efectivas",
+    "checks": [
+      {
+        "source": "10.60.10.4",
+        "destination": "10.60.20.4",
+        "port": 3000,
+        "expectedAllowed": true,
+        "connected": true,
+        "result": "PASS"
+      },
+      {
+        "source": "10.60.10.4",
+        "destination": "10.60.20.4",
+        "port": 5432,
+        "expectedAllowed": false,
+        "connected": false,
+        "result": "PASS"
+      },
+      {
+        "source": "10.60.10.4",
+        "destination": "10.60.20.4",
+        "port": 8081,
+        "expectedAllowed": false,
+        "connected": false,
+        "result": "PASS"
+      },
+      {
+        "source": "10.60.10.4",
+        "destination": "10.60.20.4",
+        "port": 22,
+        "expectedAllowed": false,
+        "connected": false,
+        "result": "PASS"
+      }
+    ],
+    "apiHealth": {
+      "httpStatus": 200,
+      "body": {
+        "status": "ok",
+        "mode": "public",
+        "data": "synthetic"
+      }
+    }
+  },
+  "externalIngress": [
+    {
+      "source": "Equipo externo a la VNet; IP del evaluador omitida",
+      "destination": "20.221.208.49",
+      "port": 80,
+      "expectedAllowed": true,
+      "connected": true,
+      "result": "PASS"
+    },
+    {
+      "source": "Equipo externo a la VNet; IP del evaluador omitida",
+      "destination": "20.221.208.49",
+      "port": 22,
+      "expectedAllowed": false,
+      "connected": false,
+      "result": "PASS"
+    },
+    {
+      "source": "Equipo externo a la VNet; IP del evaluador omitida",
+      "destination": "20.221.208.49",
+      "port": 3000,
+      "expectedAllowed": false,
+      "connected": false,
+      "result": "PASS"
+    },
+    {
+      "source": "Equipo externo a la VNet; IP del evaluador omitida",
+      "destination": "20.221.208.49",
+      "port": 5432,
+      "expectedAllowed": false,
+      "connected": false,
+      "result": "PASS"
+    },
+    {
+      "source": "Equipo externo a la VNet; IP del evaluador omitida",
+      "destination": "20.221.208.49",
+      "port": 8081,
+      "expectedAllowed": false,
+      "connected": false,
+      "result": "PASS"
+    }
+  ],
+  "privateNatEgress": {
+    "observedPublicIp": "20.102.241.42",
+    "expectedNatIp": "20.102.241.42",
+    "result": "PASS"
+  },
+  "publicHttpHealth": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "mode": "public",
+      "data": "synthetic"
+    }
+  },
+  "checksPassed": 10,
+  "checksFailed": 0,
+  "notes": "Un fallo TCP se contrasta con reglas y rutas efectivas en E-17; no se interpreta solo como prueba absoluta de firewall."
+}

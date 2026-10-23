@@ -21,11 +21,14 @@ if ! command -v node >/dev/null || [[ "$(node -p 'process.versions.node.split(".
 fi
 mkdir -p tmp
 python3 - <<'PY'
+import json
 from pathlib import Path
 p=Path('tests/integration.test.js').read_text()
-changes={"const pub='http://localhost:8080'":"const pub='http://10.60.10.4'",
+env=dict(line.split('=',1) for line in Path('.env').read_text().splitlines() if '=' in line)
+origin=env['PUBLIC_ORIGIN']
+changes={"const pub='http://localhost:8080'":'const pub='+json.dumps(origin),
  'docs/evidencias/E-04-pruebas.json':'docs/evidencias/E-18-azure-pruebas.json',
- 'Docker Desktop local, datos sintéticos':'Azure VM privada hacia VM web; datos sintéticos; mismo conjunto de 24 comprobaciones'}
+ 'Docker Desktop local, datos sintéticos':'Azure VM privada hacia URL pública por NAT; datos sintéticos; mismo conjunto de 24 comprobaciones'}
 for before,after in changes.items():
     if p.count(before)!=1:raise SystemExit('Runner cambió: revisar adaptación antes de continuar')
     p=p.replace(before,after)

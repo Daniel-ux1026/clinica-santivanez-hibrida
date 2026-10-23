@@ -1,0 +1,394 @@
+{
+  "verifiedAtUtc": "2026-10-23T16:38:23.587841+00:00",
+  "publicBranch": "Dev",
+  "publicCommitBeforeEvidence": "ca0bc416e21185036e4dac3c82fc4f229b04ae9f",
+  "applicationSourceCommit": "ca0bc416e21185036e4dac3c82fc4f229b04ae9f",
+  "applicationFilesMatchingDeployedCommit": [
+    {
+      "path": ".dockerignore",
+      "sha256CanonicalLf": "dec50109dc2f9da86328ef48d114afb43eef0291a37e4cb9d0665f509f8dac08"
+    },
+    {
+      "path": "app/private/app.js",
+      "sha256CanonicalLf": "0352054519d2fd723101772493317de22cdf96b95c6f980f55cb00ae2adb78b2"
+    },
+    {
+      "path": "app/private/index.html",
+      "sha256CanonicalLf": "c240a8fe9a111bdb16fce883aa570d86719c523aa696fe76f1420f528140425b"
+    },
+    {
+      "path": "app/private/style.css",
+      "sha256CanonicalLf": "f52dbadbc6418f08b4ecfa9e3d61a90fd687afa2fdd11ed1c6c8c185d0fd5290"
+    },
+    {
+      "path": "app/public/app.js",
+      "sha256CanonicalLf": "8970c3baf45185418bb9b7167ff58bbe0b5915e8bdf62a7c1dcd2c341048267f"
+    },
+    {
+      "path": "app/public/index.html",
+      "sha256CanonicalLf": "a16b1eec4ff6b59eceaa6fb3af4875b2403c8ddf00c0a00c50de174be5362492"
+    },
+    {
+      "path": "app/public/style.css",
+      "sha256CanonicalLf": "f52dbadbc6418f08b4ecfa9e3d61a90fd687afa2fdd11ed1c6c8c185d0fd5290"
+    },
+    {
+      "path": "app/server/catalog.js",
+      "sha256CanonicalLf": "597f2fca2673613e8bbdf1d67e02106ebc515b52c07324907b2238ab37b7c141"
+    },
+    {
+      "path": "app/server/db.js",
+      "sha256CanonicalLf": "7942b5e8acab2e06fa4a9eb4708d587fa6f9e1a94dfcc0cc3b43f334dae9c3cb"
+    },
+    {
+      "path": "app/server/index.js",
+      "sha256CanonicalLf": "f73504cc445bbd6d4500363a7ded2696276cd46696df80c1e42458cf476ed905"
+    },
+    {
+      "path": "app/worker/index.js",
+      "sha256CanonicalLf": "3d82688f722cba1e1ab6841c87a77d4fb335ceb0a5d3e22760e20ca2217f61ff"
+    },
+    {
+      "path": "docker/Dockerfile",
+      "sha256CanonicalLf": "988ee17daf4b30f387b823e5e002b5531f8d6eb68fd78d8799661dc375b4e63a"
+    },
+    {
+      "path": "docker/Dockerfile.render",
+      "sha256CanonicalLf": "2c431e9c523ea8fd8f239e461ca8e60ea91b658af7a0998ebdc4179e24f1c5e1"
+    },
+    {
+      "path": "docker/Dockerfile.web",
+      "sha256CanonicalLf": "d9efe8bbc048065c8539752a475d160a5712038c1cb5e4074b96823498e621d0"
+    },
+    {
+      "path": "docker/nginx.conf.template",
+      "sha256CanonicalLf": "4880537605e7f5e3f284da52ba06070b1c774bcc7e697b3e0e2dac81eb1955c4"
+    },
+    {
+      "path": "infra/azure/bootstrap.sh",
+      "sha256CanonicalLf": "7cb8f18997193a9bc2e57696bbee9505069021bfa4d6f6179c0c1aa6f42872aa"
+    },
+    {
+      "path": "infra/azure/compose.private.yaml",
+      "sha256CanonicalLf": "1563515747a000fed058478ed3d170a469c208dc5161a1099d1a8db5807f3426"
+    },
+    {
+      "path": "infra/azure/compose.public.yaml",
+      "sha256CanonicalLf": "b7a26de8996a85acfffdcfebb422c6f5f7286972de210dec0da94150b7a4f5ac"
+    },
+    {
+      "path": "infra/init-db.sh",
+      "sha256CanonicalLf": "ec029520dfe1617ffafa0193d622d89d0f140f17e988c48cbe3fe09952e1663c"
+    },
+    {
+      "path": "infra/sql/private.sql",
+      "sha256CanonicalLf": "52d6b48a6fa61b5a8ac12ddc8dc26d863bd7fd08e70a5f5beabd5becb79b4330"
+    },
+    {
+      "path": "infra/sql/public.sql",
+      "sha256CanonicalLf": "850a61d8b4612360381277de1624a0daec9b1f369baefddd8524d02bab41a09f"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256CanonicalLf": "f3e03f746f813cb382bddcd850ecbcf797ba22cb006689c5c89fb372155290a4"
+    },
+    {
+      "path": "package.json",
+      "sha256CanonicalLf": "d588fd0a8b0b5ff9ab51bf03c0306980038f8aebec61d4cfd28ac6fca9d04e0d"
+    },
+    {
+      "path": "tests/integration.test.js",
+      "sha256CanonicalLf": "f1565b77b27b0d7e70417ace5be223b46addccc1fe08241efc342ee148b83757"
+    },
+    {
+      "path": "tests/sync-protocol.mjs",
+      "sha256CanonicalLf": "d265b6e78f309ef7e667393204296fda325590c2cf64a1d1dff6c5de1f39dca5"
+    }
+  ],
+  "preparedPublicFileCount": 68,
+  "preparedPublicFilesSha256": [
+    {
+      "path": ".dockerignore",
+      "sha256WorkingCopy": "dec50109dc2f9da86328ef48d114afb43eef0291a37e4cb9d0665f509f8dac08"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256WorkingCopy": "ff56cf3aa976af18d71c7b5d793da0c4111c813dec63cdcb8a743da977d39bd2"
+    },
+    {
+      "path": ".gitignore",
+      "sha256WorkingCopy": "b61777b4e15048cc63fd814c81f7aa95f27a6e5f081177323fc50377417dd4bb"
+    },
+    {
+      "path": "README.md",
+      "sha256WorkingCopy": "84d166b12605d87bc5776087ec1ede1227b84f4d9dda56c885227977a1d85995"
+    },
+    {
+      "path": "app/private/app.js",
+      "sha256WorkingCopy": "0352054519d2fd723101772493317de22cdf96b95c6f980f55cb00ae2adb78b2"
+    },
+    {
+      "path": "app/private/index.html",
+      "sha256WorkingCopy": "62b85b717f3aaec694fc1724ad5996a0b9693916d7382302be25827cb716b101"
+    },
+    {
+      "path": "app/private/style.css",
+      "sha256WorkingCopy": "e8049c0f5faaa7f3c0c36d545cac3bdca3ee1177326592d942ddaf7e32df4af9"
+    },
+    {
+      "path": "app/public/app.js",
+      "sha256WorkingCopy": "8970c3baf45185418bb9b7167ff58bbe0b5915e8bdf62a7c1dcd2c341048267f"
+    },
+    {
+      "path": "app/public/index.html",
+      "sha256WorkingCopy": "a16b1eec4ff6b59eceaa6fb3af4875b2403c8ddf00c0a00c50de174be5362492"
+    },
+    {
+      "path": "app/public/style.css",
+      "sha256WorkingCopy": "e8049c0f5faaa7f3c0c36d545cac3bdca3ee1177326592d942ddaf7e32df4af9"
+    },
+    {
+      "path": "app/server/catalog.js",
+      "sha256WorkingCopy": "597f2fca2673613e8bbdf1d67e02106ebc515b52c07324907b2238ab37b7c141"
+    },
+    {
+      "path": "app/server/db.js",
+      "sha256WorkingCopy": "7942b5e8acab2e06fa4a9eb4708d587fa6f9e1a94dfcc0cc3b43f334dae9c3cb"
+    },
+    {
+      "path": "app/server/index.js",
+      "sha256WorkingCopy": "f73504cc445bbd6d4500363a7ded2696276cd46696df80c1e42458cf476ed905"
+    },
+    {
+      "path": "app/worker/index.js",
+      "sha256WorkingCopy": "3d82688f722cba1e1ab6841c87a77d4fb335ceb0a5d3e22760e20ca2217f61ff"
+    },
+    {
+      "path": "compose.yaml",
+      "sha256WorkingCopy": "ada73a21c119bda0ecc7d9ab541089f2826dabf465a3e261c7afde69a62b00b7"
+    },
+    {
+      "path": "config/ejemplos.env",
+      "sha256WorkingCopy": "3e6c350eefbf40fc522690a687df8d75a18864ee413f5b72c8d4427490f5cd87"
+    },
+    {
+      "path": "docker/Dockerfile",
+      "sha256WorkingCopy": "988ee17daf4b30f387b823e5e002b5531f8d6eb68fd78d8799661dc375b4e63a"
+    },
+    {
+      "path": "docker/Dockerfile.render",
+      "sha256WorkingCopy": "2c431e9c523ea8fd8f239e461ca8e60ea91b658af7a0998ebdc4179e24f1c5e1"
+    },
+    {
+      "path": "docker/Dockerfile.web",
+      "sha256WorkingCopy": "d9efe8bbc048065c8539752a475d160a5712038c1cb5e4074b96823498e621d0"
+    },
+    {
+      "path": "docker/nginx.conf.template",
+      "sha256WorkingCopy": "4880537605e7f5e3f284da52ba06070b1c774bcc7e697b3e0e2dac81eb1955c4"
+    },
+    {
+      "path": "docs/arquitectura-azure.png",
+      "sha256WorkingCopy": "a3a97cc8da3b6a6e5a52643ccba8bfcebe87c8ed7dc3cbba3c600b03523c1705"
+    },
+    {
+      "path": "docs/arquitectura.png",
+      "sha256WorkingCopy": "d0ade887905fdc6cec1a88375226f0c1e3a04ddd5dde1f6b458d906b0fc9595a"
+    },
+    {
+      "path": "docs/despliegue-render.md",
+      "sha256WorkingCopy": "ef16573c68a936b5105f4894ee3634bfaeb41bbfacaf55578b1901a1368b991d"
+    },
+    {
+      "path": "docs/estimacion-azure.json",
+      "sha256WorkingCopy": "1588e781c33752409eb2eaf7eda70631022ae6dd6462ae3b78aa872b9841d522"
+    },
+    {
+      "path": "docs/evidencias/E-01-redes.json",
+      "sha256WorkingCopy": "880f74a513562ef0a538df546508fdbadc7e356957bce8999633b889f7f9fc43"
+    },
+    {
+      "path": "docs/evidencias/E-02-recursos.json",
+      "sha256WorkingCopy": "f63b3e860bc26e1e5b6a65b2af989ea6bb390a767043a637706111cceadf9940"
+    },
+    {
+      "path": "docs/evidencias/E-03-restauracion.json",
+      "sha256WorkingCopy": "4a30a7d2a38c8d933ccb7c1551b80e0812ca8181e80aa1ab9b7d8d4e2e822ae3"
+    },
+    {
+      "path": "docs/evidencias/E-04-pruebas.json",
+      "sha256WorkingCopy": "a01f275acbf118466db07a6d37ff42c85a5abf784192eae9035d6aa2f7002138"
+    },
+    {
+      "path": "docs/evidencias/E-05-version.json",
+      "sha256WorkingCopy": "5e17df37541dfacefc4897fa4af7966ecec891d5bbadfb311049873e69d6369e"
+    },
+    {
+      "path": "docs/evidencias/E-06-observabilidad.txt",
+      "sha256WorkingCopy": "f2715b751b2a8d7d8c32d4fef78d3428e5ab50ab8d1ac71a0196a38ac941985e"
+    },
+    {
+      "path": "docs/evidencias/E-07-portal-publico.png",
+      "sha256WorkingCopy": "123768190c00490ba0e24286347e4f27174ca309bb133a9e3dba40aad44bb811"
+    },
+    {
+      "path": "docs/evidencias/E-08-formulario.png",
+      "sha256WorkingCopy": "5b0eb964154bec0cd6046a8ffdaf179e21e8dec2384c65df348e79cf7ee7a506"
+    },
+    {
+      "path": "docs/evidencias/E-09-agenda-privada.png",
+      "sha256WorkingCopy": "d515ebf06aa01f7df22639e6924293761bc7eef65f664954ef6f73276e1aa4f4"
+    },
+    {
+      "path": "docs/evidencias/E-10-dependencias.json",
+      "sha256WorkingCopy": "4518d5e537bc92552846aa75c41567fe947411a88f45a77568abb5e2ffe09eb3"
+    },
+    {
+      "path": "docs/evidencias/E-11-compatibilidad-render.json",
+      "sha256WorkingCopy": "ed9ff6f889c81d4bf31fc0000ddd064652bd401bbd41c722ef3be71b1411eaa5"
+    },
+    {
+      "path": "docs/evidencias/E-12-protocolo-sync.json",
+      "sha256WorkingCopy": "d80cc8644ed8d30c71bc44731d8295e0f0782c0c02dc02afb2c6979df1155b0e"
+    },
+    {
+      "path": "docs/evidencias/E-13-manifiesto-render.json",
+      "sha256WorkingCopy": "d5f3de3907d3eb22d9ccf3245332c4168bc2fc7c1beb3ada14731997407599ea"
+    },
+    {
+      "path": "docs/evidencias/E-14-publicacion.json",
+      "sha256WorkingCopy": "2d505f0f0726f8738e2c9a71ef17b16e52a2bbf29e70e3152f7ce9eafbc83b96"
+    },
+    {
+      "path": "docs/evidencias/E-17-azure-infraestructura.json",
+      "sha256WorkingCopy": "54d65401ac3be4efa88a3b749dad38f507dfdbaca8d4c1f7f1b58a2c96a0226e"
+    },
+    {
+      "path": "docs/evidencias/E-18-azure-pruebas.json",
+      "sha256WorkingCopy": "fe17041e70d67b9c370f39f881464af614e8e842a06415a5ea13a97022d0bcb9"
+    },
+    {
+      "path": "docs/evidencias/E-19-azure-restauracion.json",
+      "sha256WorkingCopy": "a6bced5e597ea21b097fe9d876e0a1cd683ca1a0ea34da42539e3cc7a60f20d9"
+    },
+    {
+      "path": "docs/evidencias/E-20-azure-portal.png",
+      "sha256WorkingCopy": "1e9ab4a0593e6e3f7c8f476f0a8c4d0219d9acf8ff14ce6a8539e724d54ccf69"
+    },
+    {
+      "path": "docs/evidencias/E-21-azure-red.json",
+      "sha256WorkingCopy": "daad4d5018b40bc791340b57f90e3565a3142c57a3badeec881c39691b2808c3"
+    },
+    {
+      "path": "docs/evidencias/E-22-azure-runtime.json",
+      "sha256WorkingCopy": "cf82ac08a1d99a9e9ce590ae59fcc7cbb0743e07a22db8e78bf30bf0e6a03946"
+    },
+    {
+      "path": "docs/topologia-red.png",
+      "sha256WorkingCopy": "34ad8910972691005415b56f6e45d549f027bf1e5a28aa366acf91d326717c45"
+    },
+    {
+      "path": "infra/azure/README.md",
+      "sha256WorkingCopy": "cecc4ca0dbf02010346785082271552a4b31763f92ac3951a0b691417a18032d"
+    },
+    {
+      "path": "infra/azure/bootstrap.sh",
+      "sha256WorkingCopy": "7cb8f18997193a9bc2e57696bbee9505069021bfa4d6f6179c0c1aa6f42872aa"
+    },
+    {
+      "path": "infra/azure/compose.private.yaml",
+      "sha256WorkingCopy": "1563515747a000fed058478ed3d170a469c208dc5161a1099d1a8db5807f3426"
+    },
+    {
+      "path": "infra/azure/compose.public.yaml",
+      "sha256WorkingCopy": "b7a26de8996a85acfffdcfebb422c6f5f7286972de210dec0da94150b7a4f5ac"
+    },
+    {
+      "path": "infra/azure/main.bicep",
+      "sha256WorkingCopy": "a4c73a77e76e7364d23ac7f10f02268b156abf0edfd8033951431debc4ff4d15"
+    },
+    {
+      "path": "infra/azure/verify-network.sh",
+      "sha256WorkingCopy": "c73ad49232a8358dd8dccb5fca63f24765ff74d0c0e64ee319d662e8d8c102f4"
+    },
+    {
+      "path": "infra/azure/verify-private.sh",
+      "sha256WorkingCopy": "cd87eedcf6b3c8d6aed19276d934e36c4abfb4d927d486cca24049e9a3412117"
+    },
+    {
+      "path": "infra/init-db.sh",
+      "sha256WorkingCopy": "ec029520dfe1617ffafa0193d622d89d0f140f17e988c48cbe3fe09952e1663c"
+    },
+    {
+      "path": "infra/migracion-vpc.md",
+      "sha256WorkingCopy": "4901d0151ac2d07d2cb2cf776e40cd358e341d25280a477d0d4278653ea45008"
+    },
+    {
+      "path": "infra/sql/private.sql",
+      "sha256WorkingCopy": "52d6b48a6fa61b5a8ac12ddc8dc26d863bd7fd08e70a5f5beabd5becb79b4330"
+    },
+    {
+      "path": "infra/sql/public.sql",
+      "sha256WorkingCopy": "850a61d8b4612360381277de1624a0daec9b1f369baefddd8524d02bab41a09f"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256WorkingCopy": "f3e03f746f813cb382bddcd850ecbcf797ba22cb006689c5c89fb372155290a4"
+    },
+    {
+      "path": "package.json",
+      "sha256WorkingCopy": "d588fd0a8b0b5ff9ab51bf03c0306980038f8aebec61d4cfd28ac6fca9d04e0d"
+    },
+    {
+      "path": "render.yaml",
+      "sha256WorkingCopy": "3375f52b72c69ca08b48fa0d4b6ae4fe837506ea51bb8df57c53e0a84ca87105"
+    },
+    {
+      "path": "scripts/create-azure-diagram.py",
+      "sha256WorkingCopy": "d935d0bf7c34912db52d76ae97961dfc1e2f1948ac784ea5ad9277bb94568676"
+    },
+    {
+      "path": "scripts/create-diagrams.py",
+      "sha256WorkingCopy": "845240ddc9e981c99adc0c7810889cd48147d46467b03555d1462f9f8b1d4623"
+    },
+    {
+      "path": "scripts/setup-azure.mjs",
+      "sha256WorkingCopy": "87db11269b58391e81f3f2c69f3ac4053fa29ff94ebdbf5de581951560673507"
+    },
+    {
+      "path": "scripts/setup.mjs",
+      "sha256WorkingCopy": "a075bce0ecfbf47e3325f0db11335608192afed7e179c38f4ad1be7a88f6788b"
+    },
+    {
+      "path": "scripts/validate-infra.mjs",
+      "sha256WorkingCopy": "2009dca1fae129958ef301fc0401419655201c3811c37337e998a0aab6930dbe"
+    },
+    {
+      "path": "scripts/verify-backup.mjs",
+      "sha256WorkingCopy": "7fa44d4d83451e2f2b961c2ca59ac4f9f1f930e8c16ff72e9a38a61403b86a33"
+    },
+    {
+      "path": "scripts/verify-render.mjs",
+      "sha256WorkingCopy": "2225a44cdd199c9df0284aea7318ada966d33369c449823509c52699b63d415d"
+    },
+    {
+      "path": "tests/integration.test.js",
+      "sha256WorkingCopy": "f1565b77b27b0d7e70417ace5be223b46addccc1fe08241efc342ee148b83757"
+    },
+    {
+      "path": "tests/sync-protocol.mjs",
+      "sha256WorkingCopy": "d265b6e78f309ef7e667393204296fda325590c2cf64a1d1dff6c5de1f39dca5"
+    }
+  ],
+  "secretScan": {
+    "knownSecretValuesChecked": 16,
+    "currentFilesChecked": 68,
+    "historicalBlobsChecked": 120,
+    "matches": 0,
+    "academicIdsCheckedInPreparedFiles": 3,
+    "academicIdMatches": 0,
+    "limits": "Búsqueda de valores locales conocidos y códigos académicos dados; no certifica ausencia universal de secretos. No escanea repositorios ajenos."
+  },
+  "excluded": "PDF/Word, generadores académicos, guion y reparto nominativo, parámetros, contraseñas, cachés, llaves privadas, respaldos y antecedentes.",
+  "note": "El SHA de aplicación es inmutable. La revisión posterior agrega ajustes de IaC, verificadores, diagramas y evidencias; E-15 local identifica el HEAD público final."
+}

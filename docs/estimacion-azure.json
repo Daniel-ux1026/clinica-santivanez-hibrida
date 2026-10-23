@@ -1,0 +1,56 @@
+{
+  "queriedAtUtc": "2026-10-23T05:03:22.289491+00:00",
+  "region": "northcentralus",
+  "currency": "USD",
+  "source": "https://prices.azure.com/api/retail/prices",
+  "estimateNotInvoice": true,
+  "assumedHoursPerMonth": 730,
+  "items": [
+    {
+      "resource": "VM web B2ats_v2",
+      "quantity": 1,
+      "unit": "USD/hour",
+      "unitPrice": 0.0094
+    },
+    {
+      "resource": "VM privada B2als_v2",
+      "quantity": 1,
+      "unit": "USD/hour",
+      "unitPrice": 0.0376
+    },
+    {
+      "resource": "NAT Gateway Standard",
+      "quantity": 1,
+      "unit": "USD/hour",
+      "unitPrice": 0.045
+    },
+    {
+      "resource": "IPv4 pública estática Standard",
+      "quantity": 2,
+      "unit": "USD/hour",
+      "unitPrice": 0.005
+    },
+    {
+      "resource": "Discos E4 LRS 32 GiB (dos SO y uno datos)",
+      "quantity": 3,
+      "unit": "USD/month",
+      "unitPrice": 2.4
+    }
+  ],
+  "baseHourlyBothVmsRunning": 0.111863,
+  "base24HoursBothRunning": 2.6847,
+  "base96HoursBothRunning": 10.7388,
+  "base24HoursBothDeallocated": 1.5567,
+  "additionalCharges": {
+    "natProcessedUsdPerGb": 0.045,
+    "e4DiskOperationsUsdPer10000": 0.002,
+    "networkEgress": "Variable según tráfico, tarifas y beneficios de la cuenta"
+  },
+  "initialCreditStatedByUserUsd": 100,
+  "remainingCreditConfirmed": false,
+  "costControls": {
+    "dailyVmShutdown": "03:00 America/Lima",
+    "note": "El apagado de VMs no detiene NAT, IPs ni discos. Eliminar los recursos del grupo exclusivo al terminar y después de conservar lo necesario."
+  },
+  "limits": "Tarifas minoristas consultadas, sin descontar beneficios gratuitos; no son factura, tope de gasto ni saldo de crédito. El importe real depende de horas y consumo."
+}

@@ -97,7 +97,6 @@ resource privateNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
     securityRules: [
       { name: 'api-from-web-vm-only', properties: { priority: 100, direction: 'Inbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRange: '3000', sourceAddressPrefix: publicAddress, destinationAddressPrefix: privateAddress } }
       { name: 'deny-other-inbound', properties: { priority: 4096, direction: 'Inbound', access: 'Deny', protocol: '*', sourcePortRange: '*', destinationPortRange: '*', sourceAddressPrefix: '*', destinationAddressPrefix: '*' } }
-      { name: 'web-validation', properties: { priority: 100, direction: 'Outbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRange: '80', sourceAddressPrefix: privateAddress, destinationAddressPrefix: publicAddress } }
       { name: 'nat-updates-and-container-registry', properties: { priority: 120, direction: 'Outbound', access: 'Allow', protocol: 'Tcp', sourcePortRange: '*', destinationPortRanges: ['80', '443'], sourceAddressPrefix: privateAddress, destinationAddressPrefix: 'Internet' } }
       { name: 'deny-other-outbound', properties: { priority: 4096, direction: 'Outbound', access: 'Deny', protocol: '*', sourcePortRange: '*', destinationPortRange: '*', sourceAddressPrefix: '*', destinationAddressPrefix: '*' } }
     ]

@@ -11,11 +11,14 @@ config/azure-*.parameters.json
 .azure/
 *.pem
 *.key
+__pycache__/
+*.pyc
 *.log
 .DS_Store
-
 docs/*.pdf
 docs/*.docx
 docs/distribucion-contribuciones.md
+docs/guion-sustentacion.md
 docs/revision-detallada-apf2.md
-scripts/create-report.py
+scripts/*report*.py
+scripts/export-report.ps1
